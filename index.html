@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ LOVE ALARM · 15+ ringtones · snooze 5-60min</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #2c1a2e 0%, #3d2b3f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem;
+            position: relative;
+        }
+        body::before {
+            content: "❤️";
+            position: absolute;
+            font-size: 20vw;
+            opacity: 0.03;
+            color: #ffc0cb;
+            bottom: 0;
+            right: 0;
+            transform: rotate(-10deg);
+            pointer-events: none;
+        }
+        .heart-float {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: float 6s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .love-card {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 240, 245, 0.1);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            border-radius: 3.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 2px #ff99aa inset, 0 0 20px #ffb6c1;
+            color: #fff5f7;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 2.6rem;
+            margin: 0 0 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-shadow: 0 0 10px #ffb6c1;
+        }
+        h1 span {
+            background: #d45e7a;
+            font-size: 1rem;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #ffecf0;
+            border: 1px solid #ffb0bb;
+            box-shadow: 0 0 15px #ffb6c1;
+        }
+        .sub {
+            margin-bottom: 2.2rem;
+            font-size: 1.1rem;
+            color: #ffdbdb;
+            border-left: 5px solid #ff80a5;
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+
+        .field {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #ffd9e2;
+            margin-bottom: 0.7rem;
+        }
+        label i { font-style: normal; font-size: 1.3rem; filter: drop-shadow(0 0 5px #ff99aa); }
+
+        input, select {
+            width: 100%;
+            background: #3a2635;
+            border: 2px solid #ff99b4;
+            border-radius: 60px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            color: #fff0f5;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #ff4d6d;
+            box-shadow: 0 0 0 6px #ffb0bb80, 0 0 20px #ffb6c1;
+            background: #4d2e45;
+        }
+
+        .double-row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .double-row > div {
+            flex: 1 1 200px;
+        }
+
+        /* Ringtone grid love style */
+        .ringtone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        .ringtone-item {
+            background: #4d3347;
+            border: 2px solid #ff99b9;
+            border-radius: 60px;
+            padding: 0.8rem 0.3rem 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #ffdee6;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px #1f0f1a;
+        }
+        .ringtone-item.selected {
+            background: #a14f6e;
+            border-color: #ffccd9;
+            box-shadow: 0 0 0 3px #ff99bb, 0 0 25px #ffa5c3;
+            color: white;
+            font-weight: 600;
+        }
+        .preview-icon {
+            margin-left: auto;
+            padding-right: 0.6rem;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* voice row */
+        .voice-row {
+            display: flex;
+            align-items: center;
+            background: #2f1d2b;
+            border-radius: 60px;
+            border: 2px solid #ff99b4;
+            padding: 0.2rem 0.2rem 0.2rem 2rem;
+        }
+        .voice-row input {
+            border: none;
+            background: transparent;
+            padding: 0.9rem 0.5rem;
+            flex: 1;
+        }
+        .voice-row button {
+            background: #bf4f70;
+            border: none;
+            border-radius: 60px;
+            padding: 0.8rem 2rem;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            border: 2px solid #ffa5c3;
+            white-space: nowrap;
+            font-size: 1rem;
+        }
+        .voice-row button:hover {
+            background: #d46b8c;
+            box-shadow: 0 0 20px #ffaec9;
+        }
+
+        /* snooze dropdown area */
+        .snooze-love {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #452f3f;
+            border-radius: 60px;
+            padding: 0.5rem 1rem 0.5rem 2rem;
+            border: 2px solid #ff99b4;
+            margin: 2rem 0 1.8rem;
+        }
+        .snooze-love span {
+            font-size: 1.1rem;
+            color: #ffd9e2;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .snooze-love select {
+            width: auto;
+            background: #6d3e58;
+            border: 2px solid #ffb6c1;
+            border-radius: 60px;
+            padding: 0.8rem 2.2rem 0.8rem 2rem;
+            font-size: 1.1rem;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .snooze-love select option {
+            background: #3f273a;
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0 2rem;
+        }
+        .save-btn {
+            background: #b34e6e;
+            border: 3px solid #ff99bb;
+            color: white;
+            padding: 1.1rem 2.5rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px #2d1422, 0 0 30px #ffb6c1;
+            flex: 2;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .save-btn:hover {
+            background: #cf6a8b;
+            border-color: #ffccdd;
+            transform: scale(1.02);
+        }
+
+        .reminder-list {
+            background: #392a35e0;
+            border-radius: 2.8rem;
+            padding: 1.8rem 2rem;
+            border: 2px solid #ff99b9;
+            box-shadow: 0 0 25px #ffb6c180;
+            margin-top: 1.2rem;
+        }
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            color: #ffd0da;
+            border-bottom: 2px dashed #ff99bb;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+        .reminder-item {
+            background: #573e4f;
+            margin: 1rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 12px solid #ff99bb;
+            box-shadow: 0 8px 12px #20121c;
+        }
+        .reminder-info {
+            display: flex;
+            gap: 1.2rem;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .reminder-label {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #ffeef2;
+        }
+        .chip {
+            background: #7e4662;
+            padding: 0.3rem 1.3rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            color: #ffdee6;
+            border: 1px solid #ffb6c1;
+        }
+        .delete-reminder {
+            background: transparent;
+            border: 2px solid #ff7f9f;
+            color: #ffc0cb;
+            border-radius: 60px;
+            padding: 0.4rem 1.6rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.1s;
+        }
+        .delete-reminder:hover {
+            background: #e05b7e;
+            color: white;
+            border-color: #ffc0cb;
+        }
+
+        /* ALARM OVERLAY love edition */
+        .alarm-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(50, 20, 30, 0.95);
+            backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s;
+        }
+        .alarm-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .alarm-card {
+            background: #402c39;
+            max-width: 550px;
+            width: 90%;
+            border-radius: 80px;
+            padding: 3rem 2.5rem;
+            border: 4px solid #ffb0c3;
+            box-shadow: 0 0 70px #ff99bb, 0 0 30px #ff80a0 inset;
+            text-align: center;
+        }
+        .alarm-card h2 {
+            font-size: 3rem;
+            margin: 0.5rem 0 0.5rem;
+            color: #ffd9e2;
+            text-shadow: 0 0 20px #ffb6c1;
+        }
+        .heart-beat {
+            font-size: 2.5rem;
+            animation: heartbeat 1.2s infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+        .alarm-ringtone-name {
+            background: #5b3a4e;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 1.2rem 0 2rem;
+            font-size: 1.5rem;
+            border: 2px solid #ff99bb;
+            color: #ffd0da;
+        }
+        .alarm-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .snooze-btn, .stop-btn {
+            border: none;
+            padding: 1.2rem 2rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 60px;
+            min-width: 160px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            border: 3px solid transparent;
+        }
+        .snooze-btn {
+            background: #99466b;
+            color: white;
+            border-color: #ffc1d0;
+        }
+        .snooze-btn:hover {
+            background: #bc5881;
+            box-shadow: 0 0 30px #ffa5c3;
+        }
+        .stop-btn {
+            background: #ad3f5c;
+            color: white;
+            border-color: #ffa7b9;
+        }
+        .stop-btn:hover {
+            background: #d45979;
+        }
+        .snooze-select-small {
+            background: #34222e;
+            color: white;
+            border: 2px solid #ff99bb;
+            border-radius: 40px;
+            padding: 0.8rem 2rem;
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        .footer-note {
+            margin-top: 1rem;
+            color: #d99aae;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="heart-float">❤️</div>
+<div class="love-card">
+    <h1>❤️ LOVE ALARM <span>snooze 5–60min</span></h1>
+    <div class="sub">with 15+ preset ringtones & voice reminder</div>
+
+    <!-- label + voice -->
+    <div class="field">
+        <label><i>💌</i> LABEL · VOICE MESSAGE</label>
+        <div class="voice-row">
+            <input type="text" id="labelInput" value="❤️ Call my love ❤️" placeholder="e.g. kiss & hug">
+            <button id="speakBtn"><span>🎤</span> speak with love</button>
+        </div>
+    </div>
+
+    <!-- date & time -->
+    <div class="double-row">
+        <div><label>📅 DATE</label><input type="date" id="reminderDate"></div>
+        <div><label>⏰ TIME</label><input type="time" id="reminderTime" value="20:30"></div>
+    </div>
+
+    <!-- 15+ ringtones grid -->
+    <div class="field">
+        <label><i>🎶</i> RINGTONES (15+ presets) — double click to preview</label>
+        <div class="ringtone-grid" id="ringtoneGrid"></div>
+        <input type="hidden" id="selectedRingtone" value="heartbeat">
+    </div>
+
+    <!-- snooze dropdown 5-60 min (love edition) -->
+    <div class="snooze-love">
+        <span>😴💤 snooze duration <span style="font-size:1.5rem;">⏳</span></span>
+        <select id="snoozeSelect">
+            <option value="5">5 minutes</option>
+            <option value="10">10 minutes</option>
+            <option value="15" selected>15 minutes (love)</option>
+            <option value="20">20 minutes</option>
+            <option value="25">25 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="35">35 minutes</option>
+            <option value="40">40 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="50">50 minutes</option>
+            <option value="55">55 minutes</option>
+            <option value="60">60 minutes</option>
+        </select>
+    </div>
+
+    <!-- set alarm button -->
+    <div class="action-buttons">
+        <button class="save-btn" id="addReminderBtn"><span>❤️</span> SET LOVING ALARM</button>
+    </div>
+
+    <!-- reminder list -->
+    <div class="reminder-list">
+        <div class="list-header"><span>💘 my heart alarms</span><span>snooze · stop</span></div>
+        <div id="remindersContainer"></div>
+    </div>
+    <div class="footer-note">* when time's up, you'll see a full‑heart alarm with your ringtone & voice</div>
+</div>
+
+<!-- ALARM OVERLAY with snooze dropdown (5-60) inside -->
+<div class="alarm-overlay" id="alarmOverlay">
+    <div class="alarm-card">
+        <div class="heart-beat">❤️</div>
+        <h2 id="alarmLabel">❤️ Be my love ❤️</h2>
+        <div class="alarm-ringtone-name" id="alarmRingtoneDisplay">heartbeat</div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 1.5rem 0;">
+            <span style="color:#ffb6c1;">snooze</span>
+            <select id="alarmSnoozeSelect" class="snooze-select-small">
+                <option value="5">5 min</option>
+                <option value="10">10 min</option>
+                <option value="15" selected>15 min</option>
+                <option value="20">20 min</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
+                <option value="35">35 min</option>
+                <option value="40">40 min</option>
+                <option value="45">45 min</option>
+                <option value="50">50 min</option>
+                <option value="55">55 min</option>
+                <option value="60">60 min</option>
+            </select>
+        </div>
+        <div class="alarm-buttons">
+            <button class="snooze-btn" id="snoozeBtn"><span>😴</span> SNOOZE</button>
+            <button class="stop-btn" id="stopBtn"><span>🛑</span> STOP</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- LOVE THEME RINGTONES (15+)
+        const ringtones = [
+            "heartbeat", "sweet love", "kiss", "hug", "cupid",
+            "romance", "cherish", "darling", "beloved", "amore",
+            "soulmate", "sweetheart", "lovebird", "dream", "forever",
+            "lullaby", "passion", "tender", "adore"
+        ]; // 19 ❤️
+
+        const ringtoneGrid = document.getElementById('ringtoneGrid');
+        const selectedRingtoneHidden = document.getElementById('selectedRingtone');
+
+        function renderRingtones() {
+            ringtoneGrid.innerHTML = '';
+            ringtones.forEach(rt => {
+                const item = document.createElement('div');
+                item.className = 'ringtone-item';
+                if (rt === selectedRingtoneHidden.value) item.classList.add('selected');
+                item.dataset.ringtone = rt;
+                item.innerHTML = `${rt} <span class="preview-icon">❤️</span>`;
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.ringtone-item').forEach(el => el.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedRingtoneHidden.value = rt;
+                });
+                // double-click preview (romantic beep)
+                item.addEventListener('dblclick', (e) => {
+                    e.stopPropagation();
+                    try {
+                        const actx = new (window.AudioContext || window.webkitAudioContext)();
+                        if (actx.state === 'suspended') actx.resume();
+                        const osc = actx.createOscillator();
+                        const gain = actx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.value = 580;
+                        gain.gain.value = 0.2;
+                        osc.connect(gain).connect(actx.destination);
+                        osc.start();
+                        osc.stop(actx.currentTime + 0.3);
+                    } catch (e) {}
+                });
+                ringtoneGrid.appendChild(item);
+            });
+        }
+        renderRingtones();
+
+        // voice
+        const labelInput = document.getElementById('labelInput');
+        document.getElementById('speakBtn').addEventListener('click', () => {
+            if (!labelInput.value.trim()) return alert('say something love');
+            const utter = new SpeechSynthesisUtterance(labelInput.value);
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utter);
+        });
+
+        // set today's date
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2,'0');
+        const dd = String(today.getDate()).padStart(2,'0');
+        document.getElementById('reminderDate').value = `${yyyy}-${mm}-${dd}`;
+
+        // reminders array
+        let reminders = [];
+        const remindersContainer = document.getElementById('remindersContainer');
+
+        // overlay elements
+        const overlay = document.getElementById('alarmOverlay');
+        const alarmLabelSpan = document.getElementById('alarmLabel');
+        const alarmRingtoneSpan = document.getElementById('alarmRingtoneDisplay');
+        const alarmSnoozeSelect = document.getElementById('alarmSnoozeSelect');
+        const snoozeBtn = document.getElementById('snoozeBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const mainSnoozeSelect = document.getElementById('snoozeSelect'); // default dropdown
+
+        let currentAlarmReminder = null;
+        let ringtoneInterval = null;
+
+        function stopRingtone() {
+            if (ringtoneInterval) {
+                clearInterval(ringtoneInterval);
+                ringtoneInterval = null;
+            }
+            window.speechSynthesis.cancel();
+        }
+
+        function playLoveRingtone(ringtoneName) {
+            stopRingtone();
+            try {
+                const actx = new (window.AudioContext || window.webkitAudioContext)();
+                if (actx.state === 'suspended') actx.resume();
+
+                function beep() {
+                    if (!overlay.classList.contains('show')) return;
+                    const osc = actx.createOscillator();
+                    const gain = actx.createGain();
+                    osc.type = 'sine';
+                    // love frequency variation
+                    const hash = ringtoneName.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                    osc.frequency.value = 440 + (hash % 400);
+                    gain.gain.value = 0.15;
+                    osc.connect(gain).connect(actx.destination);
+                    osc.start();
+                    osc.stop(actx.currentTime + 0.6);
+                }
+
+                beep();
+                ringtoneInterval = setInterval(() => {
+                    if (overlay.classList.contains('show')) beep();
+                }, 2000);
+            } catch (e) {}
+        }
+
+        function triggerAlarm(reminder) {
+            if (overlay.classList.contains('show')) return;
+            currentAlarmReminder = reminder;
+            alarmLabelSpan.innerText = reminder.label;
+            alarmRingtoneSpan.innerText = reminder.ringtone;
+            overlay.classList.add('show');
+
+            const utter = new SpeechSynthesisUtterance(reminder.label);
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utter);
+
+            playLoveRingtone(reminder.ringtone);
+        }
+
+        // check time every 10 seconds
+        function checkReminders() {
+            if (overlay.classList.contains('show')) return;
+            const now = new Date();
+            reminders.forEach(rem => {
+                const reminderDateTime = new Date(rem.date + 'T' + rem.time);
+                if (now >= reminderDateTime && now < new Date(reminderDateTime.getTime() + 60000)) {
+                    triggerAlarm(rem);
+                }
+            });
+        }
+        setInterval(checkReminders, 10000);
+        checkReminders();
+
+        // snooze: use selected value from alarm overlay dropdown
+        snoozeBtn.addEventListener('click', () => {
+            if (!currentAlarmReminder) return;
+            const snoozeMins = parseInt(alarmSnoozeSelect.value, 10);
+            const newTime = new Date();
+            newTime.setMinutes(newTime.getMinutes() + snoozeMins);
+            const hours = String(newTime.getHours()).padStart(2,'0');
+            const mins = String(newTime.getMinutes()).padStart(2,'0');
+            const year = newTime.getFullYear();
+            const month = String(newTime.getMonth()+1).padStart(2,'0');
+            const day = String(newTime.getDate()).padStart(2,'0');
+
+            currentAlarmReminder.time = `${hours}:${mins}`;
+            currentAlarmReminder.date = `${year}-${month}-${day}`;
+
+            stopRingtone();
+            overlay.classList.remove('show');
+            renderReminders();
+            currentAlarmReminder = null;
+        });
+
+        // stop alarm
+        stopBtn.addEventListener('click', () => {
+            stopRingtone();
+            overlay.classList.remove('show');
+            currentAlarmReminder = null;
+        });
+
+        // add new reminder
+        document.getElementById('addReminderBtn').addEventListener('click', () => {
+            const label = labelInput.value.trim() || "Love reminder";
+            const date = document.getElementById('reminderDate').value;
+            const time = document.getElementById('reminderTime').value;
+            if (!date || !time) return alert('pick date & time, love');
+            const ringtone = selectedRingtoneHidden.value;
+
+            const newRem = { label, date, time, ringtone };
+            reminders.push(newRem);
+            renderReminders();
+
+            const utter = new SpeechSynthesisUtterance(`alarm set for ${label} at ${time}`);
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utter);
+
+            // love beep
+            try {
+                const actx = new (window.AudioContext || window.webkitAudioContext)();
+                if (actx.state === 'suspended') actx.resume();
+                const osc = actx.createOscillator();
+                osc.frequency.value = 660;
+                const gain = actx.createGain();
+                gain.gain.value = 0.1;
+                osc.connect(gain).connect(actx.destination);
+                osc.start();
+                osc.stop(actx.currentTime + 0.15);
+            } catch (e) {}
+        });
+
+        function renderReminders() {
+            if (reminders.length === 0) {
+                remindersContainer.innerHTML = `<div style="color:#c197a8; padding:1rem;">💔 no alarms — add a loving reminder</div>`;
+                return;
+            }
+            let html = '';
+            reminders.forEach((rem, idx) => {
+                html += `<div class="reminder-item">
+                    <div class="reminder-info">
+                        <span class="reminder-label">❤️ ${rem.label}</span>
+                        <div><span class="chip">${rem.date} ${rem.time}</span><span class="chip">🔔 ${rem.ringtone}</span></div>
+                    </div>
+                    <button class="delete-reminder" data-index="${idx}">delete</button>
+                </div>`;
+            });
+            remindersContainer.innerHTML = html;
+            document.querySelectorAll('.delete-reminder').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = btn.dataset.index;
+                    if (idx !== undefined) {
+                        reminders.splice(idx, 1);
+                        renderReminders();
+                    }
+                });
+            });
+        }
+
+        // demo reminders
+        reminders.push({ label: '❤️ hug him ❤️', date: '2025-05-20', time: '21:15', ringtone: 'heartbeat' });
+        reminders.push({ label: 'sweet call', date: '2025-05-20', time: '07:45', ringtone: 'romance' });
+        renderReminders();
+    })();
+</script>
+</body>
+</html>
